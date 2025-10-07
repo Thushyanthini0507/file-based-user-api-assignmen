@@ -7,7 +7,7 @@ export const getAllUsers = (req, res) => {
 };
 
 export const getUserById = (req, res) => {
-  const user = userList.find((u) => u.id.parseInt() === req.params.id);
+  const user = userList.find((u) => parseInt(u.id) === parseInt(req.params.id));
   if (!user) return res.status(404).json({ message: "User not found" });
   res.json(user);
 };
@@ -33,7 +33,7 @@ export const updateUser = (req, res) => {
   const { id } = req.params;
   const { name, email } = req.body;
 
-  const index = userList.findIndex((u) => u.id.parseInt() === id);
+  const index = userList.findIndex((u) => parseInt(u.id) === parseInt(req.params.id));
   if (index === -1) return res.status(404).json({ message: "User not found" });
 
   if (
